@@ -1,7 +1,5 @@
-#ifndef RegisterMap_h
-#define RegisterMap_h
-
-#include <Arduino.h>
+#ifndef LightControl_h
+#define LightControl_h
 
 #ifdef DEBUG_ENABLED
 	#define DEBUG(x) x

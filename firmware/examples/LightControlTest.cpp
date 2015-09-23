@@ -12,13 +12,20 @@ RegisterMap registerMap;
 
 void setup()
 {
-	Serial.begin(9600);
-	Serial.println("LightControl Sensor Example");
-
 	registerMap.setAddress(2);
+
+    Wire.begin();
+    
+	Serial.begin(9600);
+	Serial.println("LightControl Example");
+}
+
+void loop()
+{
 	registerMap.readModel();
 	registerMap.readVersion();
 	registerMap.readSerialNumber();
+	registerMap.readWavelengthCount();
 
 	Serial.print("Model: ");
 	Serial.println(registerMap.getModel());
@@ -26,13 +33,8 @@ void setup()
 	Serial.println(registerMap.getVersion());
 	Serial.print("Serial Number: ");
 	Serial.println(registerMap.getSerialNumber());
-}
-
-void loop()
-{
-	registerMap.readTemperature();
-	Serial.print("Temperature: ");
-	Serial.println(registerMap.getTemperature(););
+	Serial.print("Wavelenght Count: ");
+	Serial.println(registerMap.getWavelengthCount());
 
 	delay(1000);
 }

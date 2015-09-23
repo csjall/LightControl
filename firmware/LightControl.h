@@ -1,8 +1,7 @@
 #ifndef LightControl_h
 #define LightControl_h
 
-#include <stdint.h>
-#include <string.h>
+#include <Particle.h>
 
 //----------------------------------------------------------------------------
 

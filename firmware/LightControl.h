@@ -2,6 +2,7 @@
 #define LightControl_h
 
 #include <stdint.h>
+#include <string.h>
 
 #ifdef DEBUG_ENABLED
 	#define DEBUG(x) x

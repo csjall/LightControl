@@ -56,7 +56,7 @@ class RegisterMap
 		IMPLEMENT_REGISTER(VoltageReading4, uint16_t, 0x24, 0xFFFF)
 		IMPLEMENT_REGISTER(VoltageReading5, uint16_t, 0x26, 0xFFFF)
 
-		void receiveEvent(int16_t numberOfBytes);
+		void receiveEvent(int numberOfBytes);
 		void requestEvent();
 
 	private:

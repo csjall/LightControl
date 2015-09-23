@@ -1,4 +1,4 @@
-#include "LightControl.h"
+#include "LightControl/LightControl.h"
 
 // Connection for LightControl module to Spark Care
 // Connect sensor GND to Core GND

@@ -1,6 +1,8 @@
 #ifndef LightControl_h
 #define LightControl_h
 
+#include <stdint.h>
+
 #ifdef DEBUG_ENABLED
 	#define DEBUG(x) x
 #else 

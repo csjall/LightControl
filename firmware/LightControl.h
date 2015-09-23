@@ -4,12 +4,6 @@
 #include <stdint.h>
 #include <string.h>
 
-#ifdef DEBUG_ENABLED
-	#define DEBUG(x) x
-#else 
-	#define DEBUG(x)
-#endif
-
 //----------------------------------------------------------------------------
 
 #define IMPLEMENT_REGISTER(name, type, offset, mask) \

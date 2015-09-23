@@ -24,7 +24,7 @@ void setup()
 	Serial.println(registerMap.getModel());
 	Serial.print("Version: ");
 	Serial.println(registerMap.getVersion());
-	Serial.print(Serial Number: );
+	Serial.print("Serial Number: ");
 	Serial.println(registerMap.getSerialNumber());
 }
 

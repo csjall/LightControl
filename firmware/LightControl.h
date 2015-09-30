@@ -41,21 +41,23 @@ class RegisterMap
 		IMPLEMENT_REGISTER(CalibratedDutyCycle2, uint16_t, 0x9, 0xFFFF)
 		IMPLEMENT_REGISTER(CalibratedDutyCycle3, uint16_t, 0xB, 0xFFFF)
 		IMPLEMENT_REGISTER(CalibratedDutyCycle4, uint16_t, 0xD, 0xFFFF)
-		IMPLEMENT_REGISTER(CalibratedTemperature, uint16_t, 0xF, 0xFFFF)
-		IMPLEMENT_REGISTER(Address, uint8_t, 0x11, 0x7F)
-		IMPLEMENT_REGISTER(CompensationInterval, uint16_t,0x12, 0xFFFF)
-		IMPLEMENT_REGISTER(LightOutputFactor1, uint16_t, 0x14, 0xFFFF)
-		IMPLEMENT_REGISTER(LightOutputFactor2, uint16_t, 0x16, 0xFFFF)
-		IMPLEMENT_REGISTER(Temperature, uint16_t, 0x18, 0xFFFF)
-		IMPLEMENT_REGISTER(CalculatedDutyCycle1, uint16_t, 0x1A, 0xFFFF)
-		IMPLEMENT_REGISTER(CalculatedDutyCycle2, uint16_t, 0x1C, 0xFFFF)
-		IMPLEMENT_REGISTER(VoltageReading1, uint16_t, 0x1E, 0xFFFF)
-		IMPLEMENT_REGISTER(VoltageReading2, uint16_t, 0x20, 0xFFFF)
-		IMPLEMENT_REGISTER(VoltageReading3, uint16_t, 0x22, 0xFFFF)
-		IMPLEMENT_REGISTER(VoltageReading4, uint16_t, 0x24, 0xFFFF)
-		IMPLEMENT_REGISTER(VoltageReading5, uint16_t, 0x26, 0xFFFF)
+		IMPLEMENT_REGISTER(CalibrationTemperature, uint16_t, 0xF, 0xFFFF)
+		IMPLEMENT_REGISTER(TemperatureCoefficient1, uint16_t, 0x11, 0xFFFF)
+		IMPLEMENT_REGISTER(TemperatureCoefficient2, uint16_t, 0x13, 0xFFFF)
+		IMPLEMENT_REGISTER(Address, uint8_t, 0x15, 0x7F)
+		IMPLEMENT_REGISTER(CompensationInterval, uint16_t, 0x16, 0xFFFF)
+		IMPLEMENT_REGISTER(LightOutputFactor1, uint16_t, 0x18, 0xFFFF)
+		IMPLEMENT_REGISTER(LightOutputFactor2, uint16_t, 0x1A, 0xFFFF)
+		IMPLEMENT_REGISTER(SensorTemperature, uint16_t, 0x1C, 0xFFFF)
+		IMPLEMENT_REGISTER(CalculatedDutyCycle1, uint16_t, 0x1E, 0xFFFF)
+		IMPLEMENT_REGISTER(CalculatedDutyCycle2, uint16_t, 0x20, 0xFFFF)
+		IMPLEMENT_REGISTER(VoltageReading1, uint16_t, 0x22, 0xFFFF)
+		IMPLEMENT_REGISTER(VoltageReading2, uint16_t, 0x24, 0xFFFF)
+		IMPLEMENT_REGISTER(VoltageReading3, uint16_t, 0x26, 0xFFFF)
+		IMPLEMENT_REGISTER(VoltageReading4, uint16_t, 0x28, 0xFFFF)
+		IMPLEMENT_REGISTER(VoltageReading5, uint16_t, 0x2A, 0xFFFF)
 
-		void receiveEvent(int numberOfBytes);
+		void receiveEvent(int16_t numberOfBytes);
 		void requestEvent();
 
 	private:
@@ -67,6 +69,26 @@ class RegisterMap
 		uint8_t buffer[0x30];
 		uint8_t offset;
 		uint8_t size;
+};
+
+//----------------------------------------------------------------------------
+
+// Container for averaged circular buffer
+class CircularBuffer
+{
+	public:
+		static const uint8_t TotalValues = 4;
+
+		CircularBuffer();
+
+		void setup(uint16_t value);
+		void addValue(uint16_t value);
+		uint16_t getAverage() const;
+
+	private:
+		uint16_t values[TotalValues];
+		uint16_t runningTotal;
+		uint8_t lastIndex;
 };
 
 //----------------------------------------------------------------------------

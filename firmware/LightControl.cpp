@@ -60,6 +60,44 @@ void RegisterMap::requestEvent()
 	Wire.write(reinterpret_cast<uint8_t*>(&buffer[offset]), size);
 }
 
+
+//----------------------------------------------------------------------------
+
+
+CircularBuffer::CircularBuffer() :
+	runningTotal(0),
+	lastIndex(0)
+{
+	memset(values, 0, sizeof(values));
+}
+
+void CircularBuffer::setup(uint16_t value)
+{
+	// Fill the circular buffer for averaging.
+	for (uint8_t index = 0; index != TotalValues; ++index)
+	{
+		addValue(value);
+	}
+}
+
+void CircularBuffer::addValue(uint16_t value)
+{
+	// Add the latest value to the end of the circular buffer.
+	// Update running total and index.
+	runningTotal -= values[lastIndex];
+	values[lastIndex] = value;
+	runningTotal += values[lastIndex];
+	if (++lastIndex == TotalValues)
+	{
+		lastIndex = 0;
+	}
+}
+
+uint16_t CircularBuffer::getAverage() const
+{
+	return runningTotal / TotalValues;
+}
+
 //----------------------------------------------------------------------------
 
 Scanner::Scanner(bool _reserved)

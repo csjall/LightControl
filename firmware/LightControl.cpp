@@ -50,7 +50,7 @@ void RegisterMap::writeHeader(uint8_t offset, uint8_t size)
 	Wire.write(reinterpret_cast<uint8_t*>(&header), sizeof(header));
 }
 
-void RegisterMap::receiveEvent(int numberOfBytes)
+void RegisterMap::receiveEvent(int16_t numberOfBytes)
 {
 	readHeader();
 }
